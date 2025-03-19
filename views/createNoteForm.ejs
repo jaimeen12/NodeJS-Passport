@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Create Note</title>
+</head>
+<body>
+    <h1>Create Note</h1>
+
+    <form action="/createNote" method="POST">
+        <fieldset>
+          <div>
+            <label for="title" class="form-label mt-4">Title</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" placeholder="Enter title">
+          </div>
+          <div>
+            <label for="status" class="form-label mt-4">Status</label>
+            <select class="form-select" id="status" name="status" required>
+              <option>Pending</option>
+              <option>In Progress</option>
+              <option>Complete</option>
+            </select>
+          </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+            </div>
+    </fieldset>
+    </form>
+
+</body>
+</html>
