@@ -28,7 +28,7 @@ jobs:
         script: |
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
-          cd /home/ubuntu/nodejs-ssl-server
+          cd /home/ubuntu/NodeJS-Passport
           git stash
           git pull origin main
           npm install
