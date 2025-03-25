@@ -23,7 +23,7 @@ const pool = mysql.createPool({
     user: process.env.MYSQL_USER_USER,
     database: process.env.MYSQL_USER_DATABASE,
     host: process.env.MYSQL_HOST,
-    createDatabaseTable: true
+    //createDatabaseTable: true
 })
 
 //EJS
@@ -44,7 +44,7 @@ const options ={
     database: process.env.MYSQL_DB,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    createDatabaseTable: true
+    //createDatabaseTable: true
      
  
  
