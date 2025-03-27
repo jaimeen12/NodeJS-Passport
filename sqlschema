@@ -1,25 +1,33 @@
 CREATE DATABASE notes;
 USE notes;
 
-CREATE TABLE notes_table (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    contents TEXT(255) NOT NULL,
-    created_by VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS `notes_table` (
+
+`id` INT AUTO_INCREMENT PRIMARY KEY,
+
+`title` VARCHAR(255) NOT NULL,
+
+`status` enum('Pending', 'In Progress', 'Complete') NOT NULL,
+
+`created_by` VARCHAR(255) NOT NULL
+
+
+);
 
 INSERT INTO notes_table (title, contents, created_by)
 VALUES
-('First Note', 'This is the first note.','root'),
-('Second Note', 'This is the second note.','root');
+('First Note', 'This is the first note.','test'),
+('Second Note', 'This is the second note.','test');
 
 CREATE TABLE IF NOT EXISTS `User` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(255) NOT NULL UNIQUE,
-  `password` VARCHAR(255) NOT NULL
+  `password` VARCHAR(255) NOT NULL,
+  'role' enum('admin','user') NOT NULL
 );
+
 
 CREATE TABLE IF NOT EXISTS `sessions` (
 `session_id` varchar(128) COLLATE utf8mb4_bin NOT NULL, 

@@ -21,6 +21,13 @@ export async function getNotes(userEmail) {
     return rows;
 }
 
+export async function getAllNotes() {
+
+    const [rows] = await pool.query(`
+        SELECT * FROM notes_table`)
+    return rows;
+}
+
 export async function getNote(id) {
     const [row] = await pool.query(`
         SELECT * 

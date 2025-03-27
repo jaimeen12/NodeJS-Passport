@@ -52,7 +52,7 @@ export async function getUserByEmail(email) {
 
 export async function insertUser (first_name, last_name, email, password) {
     return new Promise((resolve, reject)=>{
-        pool.query('INSERT INTO User (first_name, last_name, email, password) VALUES (?, ?, ?,?)', [first_name, last_name, email, password], (error, result)=>{
+        pool.query('INSERT INTO User (first_name, last_name, email, password,role) VALUES (?, ?, ?,?,?)', [first_name, last_name, email, password,'user'], (error, result)=>{
             if(error){
                 return reject(error);
             }

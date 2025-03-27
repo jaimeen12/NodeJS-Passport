@@ -1,7 +1,5 @@
 <h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= name %></p>
-
-<%- include('./partials/messages.ejs') %>
+<p class="lead mb-3">Welcome Administrator</p>
 
 <div class="d-grid gap-2">
     <a href="/createNoteForm" class="btn btn-lg btn-primary">Create a Note</a>
@@ -15,6 +13,7 @@
         <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Status</th>
+        <th scope="col">User</th>
         <th scope="col">Update/Delete</th>
       </tr>
     </thead>
@@ -24,6 +23,7 @@
         <td><%= note.id %></td>
         <td><%= note.title %></td>
         <td><%= note.status %></td>
+        <td><%= note.created_by %></td>
 
         <td><a class="btn btn-raised btn-danger" href="/updateNoteForm/<%= note.id %>">Update</a>  <a class="btn btn-raised btn-danger" href="/deleteNote/<%= note.id %>">Delete</a></td>
       </tr>          

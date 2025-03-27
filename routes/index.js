@@ -1,14 +1,23 @@
 import express from 'express';
 const router = express.Router();
 
-import { getNotes, getNote, createNoteController, deleteNoteController, updateNoteController, sayHello } from '../controllers/notesController.js';
+import { getNotes, getNote,getAllNotes, createNoteController, deleteNoteController, updateNoteController, sayHello } from '../controllers/notesController.js';
 
-import { ensureAuthenticated, forwardAuthenticated } from '../config/auth.js';
+import { adminRequired, ensureAuthenticated, forwardAuthenticated } from '../config/auth.js';
 
 // Route for homepage
 router.get('/', (req, res) => {
     res.render('welcome');
 });
+
+router.get('/admin', ensureAuthenticated,adminRequired, async (req, res) =>{
+    const email = req.user[0].email;
+    const notes = await getAllNotes();
+    
+    res.render('admin', {
+      notes,
+    })
+  });
 
 router.get('/dashboard', ensureAuthenticated, async (req, res) =>{
     const email = req.user[0].email;
