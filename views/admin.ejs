@@ -31,5 +31,23 @@
     </tbody>
   </table>
 
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">Files</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% fileList.forEach(file => { %>
+      <tr class="table-light">
+        <td><a href="/downloadfile/<%= file %>"><%= file %></a></td>
+
+        
+        
+      </tr>          
+      <% }); %>
+    </tbody>
+  </table>
+
 
   <a href="/user/logout" class="btn btn-secondary">Logout</a>

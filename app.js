@@ -33,7 +33,6 @@ app.set('view engine', 'ejs');
 //BodyParser
 app.use(express.urlencoded({ extended: false }));
 
-
 const IN_PROD = process.env.NODE_ENV === 'production'
 const TWO_HOURS = 1000 * 60 * 60 * 2
  
@@ -96,5 +95,22 @@ app.use('/', router)
 app.use('/user', routerUser)
 
 const PORT = process.env.PORT || 5000;
+
+class CustomError extends Error {
+  constructor(statusCode, message) {
+    super();
+    this.statusCode = statusCode;
+    this.message = message;
+  }
+}
+
+// Middleware for error handling
+app.use((err, req, res, next) => {
+  if (err instanceof CustomError) {
+    res.status(err.statusCode).json({ error: err.message });
+  } else {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.listen(PORT, console.log(`Server running on  ${PORT}`));
