@@ -1,0 +1,28 @@
+<h1 class="mt-4">Portswigger</h1>
+<p class="lead mb-3">Portswigger</p>
+
+<a href="/dashboard" class="btn btn-secondary">Back to Notes</a>
+
+<div class="d-grid gap-2">
+  </div>
+
+  <br>
+
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">Lab</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% notes.forEach(note => { %>
+      <tr class="table-light">
+        <td><%= note.title %></td>
+        <td><%= note.status %></td>
+
+        </tr>          
+      <% }); %>
+    </tbody>
+  </table>
+
