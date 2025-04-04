@@ -1,15 +1,23 @@
 import express from 'express';
 const router = express.Router();
 
-import { getNotes, getNote, createNoteController, deleteNoteController, updateNoteController, sayHello } from '../controllers/notesController.js';
-import { getPortswigger } from '../controllers/scraperController.js';
+import { getNotes, getNote,getAllNotes, createNoteController, deleteNoteController, updateNoteController, sayHello } from '../controllers/notesController.js';
 
-import { ensureAuthenticated, forwardAuthenticated } from '../config/auth.js';
+import { adminRequired, ensureAuthenticated, forwardAuthenticated } from '../config/auth.js';
 
 // Route for homepage
 router.get('/', (req, res) => {
     res.render('welcome');
 });
+
+router.get('/admin', ensureAuthenticated,adminRequired, async (req, res) =>{
+    const email = req.user[0].email;
+    const notes = await getAllNotes();
+    
+    res.render('admin', {
+      notes,
+    })
+  });
 
 router.get('/dashboard', ensureAuthenticated, async (req, res) =>{
     const email = req.user[0].email;
@@ -31,24 +39,6 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) =>{
       notes, completed, pending,total
     })
   });
-
-router.post('/portswigger', ensureAuthenticated, async (req, res) =>{
-//const email = "jaimeenlalloo13@gmail.com";
-//const password = "_6TW7F_,k[28rTk52x4A_9Hpx|-@+89q"
-const email = req.body.email;
-const password = req.body.password;
-const notes = await getPortswigger(email,password);
-console.log(notes);
-
-res.render('portswigger', {
-    notes
-})
-});
-
-router.get('/portswiggerForm', ensureAuthenticated, async (req, res) =>{
-    
-    res.render('portswiggerForm')
-    });
 
 router.get('/createNoteForm', async (req, res) => {
     res.render('createNoteForm');

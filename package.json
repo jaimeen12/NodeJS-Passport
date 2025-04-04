@@ -2,7 +2,7 @@
   "name": "website2.0",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type":"module",
   "scripts": {
     "dev": "nodemon app.js"
   },
@@ -20,8 +20,7 @@
     "express-session": "^1.18.1",
     "mysql2": "^3.13.0",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0",
-    "puppeteer": "^24.4.0"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "dotenv": "^16.4.7",
