@@ -10,18 +10,20 @@ export function PassportFunc(passport) {
             const user = await getUserByEmail(email);
 
             if (!user) {
+                
                 return done(null, false, { message: 'No user found with that email' });
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
+                
                 return done(null, false, { message: 'Password incorrect' });
             }
-
+            console.log(user)
             return done(null, user);
         } catch (error) {
-            console.error(error);
+            console.error('ERROR IN PASSPORT: '+ error);
             return done(error);
         }
     }));
