@@ -8,7 +8,7 @@ import { getNotes, getNote,getAllNotes,getAllFiles, createNoteController, delete
 
 import { adminRequired, ensureAuthenticated, forwardAuthenticated } from '../config/auth.js';
 
-
+import { getPortswigger } from '../controllers/scraperController.js';
 
 
 // Route for homepage
@@ -39,6 +39,44 @@ router.get('/downloadfile/:title',ensureAuthenticated, (req, res) => {
     }
   });
 });
+
+router.post('/portswigger', ensureAuthenticated, async (req, res) =>{
+  //const email = "jaimeenlalloo13@gmail.com";
+  //const password = "_6TW7F_,k[28rTk52x4A_9Hpx|-@+89q"
+  const email = req.body.email;
+  const password = req.body.password;
+  const notes = await getPortswigger(email,password);
+  console.log(notes);
+  
+  res.render('portswigger', {
+      notes
+  })
+  });
+  
+  router.get('/portswiggerForm', ensureAuthenticated, async (req, res) =>{
+      
+      res.render('portswiggerForm')
+      });
+  
+  router.get('/createNoteForm', async (req, res) => {
+      res.render('createNoteForm');
+  });
+  
+  router.post('/createNote', async (req, res) => {
+      const user = req.user[0].email;
+      const title=req.body.title;
+      const status=req.body.status;
+      console.log(title, status,user);
+      try{
+          const note = await createNoteController(title, status, user);
+      }
+      catch(e){
+          console.log(e)
+          res.redirect('/createNoteForm');
+      }
+  
+      res.redirect('/dashboard');
+  });
 
 router.get('/upload', ensureAuthenticated, (req, res) => {
     const title = req.params.title;

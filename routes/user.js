@@ -3,6 +3,7 @@ const routerUser = express.Router();
 import bcrypt from 'bcryptjs';
 import flash from 'connect-flash'
 import passport from 'passport';
+import fs from 'fs';
 
 import { getUser,getUserByEmail, insertUser } from '../controllers/userController.js';
 
@@ -20,6 +21,8 @@ routerUser.post('/register', (req, res) => {
     const {first_name, last_name, email, password, password2 } = req.body;
     // Check required fields
     let errors = [];
+    let dir = `uploads/${email}`;
+    fs.mkdirSync(dir);
 
     if (!first_name || !last_name || !email || !password || !password2) {
         errors.push({ msg: 'Please fill in all fields' });
