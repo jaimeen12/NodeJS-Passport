@@ -1,6 +1,9 @@
 import mysql from 'mysql2';
-
+import fs from 'fs';
+import path from 'path';
+import { lstatSync } from 'fs'; 
 import dotenv from 'dotenv';
+import readDirectory from './readDirectory.js';
 dotenv.config()
 
 import { getUser,getUserByEmail } from './userController.js';
@@ -98,4 +101,14 @@ export async function updateNoteController(title, status,id,userEmail) {
 export async function sayHello (id) {
     const user = await getUserByEmail(id);
     return user;
+}
+
+
+
+
+export async function getAllFiles () {
+    const directoryPath = 'uploads';
+    const files = await readDirectory(`uploads`);
+    console.log(files);
+    return files;
 }
